@@ -1,17 +1,20 @@
-import re 
+import re
 from functools import reduce
 
 with open("input.txt") as f:
     text = f.read()
 
+
 def eval_mul(s):
-    return reduce(lambda a,b : a * b, [int(x) for x in s[4:-1].split(",")])
+    return reduce(lambda a, b: a * b, [int(x) for x in s[4:-1].split(",")])
+
 
 def part1():
     pattern = re.compile(r"mul\(\d+,\d+\)")
     found = re.findall(pattern, text)
 
     return sum([eval_mul(x) for x in found])
+
 
 def part2():
     pattern = re.compile(r"mul\(\d+,\d+\)|do\(\)|don't\(\)")
@@ -27,7 +30,8 @@ def part2():
         else:
             res += enable * eval_mul(s)
 
-    return res 
+    return res
+
 
 print(part1())
 print(part2())
